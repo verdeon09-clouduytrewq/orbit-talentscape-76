@@ -57,30 +57,12 @@ export function Contact() {
           </p>
         </div>
 
-        {/* Contact Options */}
-        <div className="flex justify-center mb-16">
-          {/* Schedule Call Option */}
-          <div className="bg-card/50 border border-border rounded-lg p-8 hover:shadow-lg transition-all duration-300 animate-fade-in hover:scale-105 max-w-md" style={{ animationDelay: "0.1s" }}>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 hover:bg-primary/20 transition-colors">
-                <Calendar className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Schedule a Call</h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                Book a free consultation call to discuss your project in detail with our experts.
-              </p>
-              <button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-lg font-semibold transition-all hover:shadow-lg">
-                Schedule Call
-              </button>
-            </div>
-          </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="order-2 lg:order-1">
             <div className="bg-card p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-semibold mb-6">Send us a message</h3>
+              <h3 className="text-2xl font-semibold mb-6">Let's start working on your project</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -207,7 +189,7 @@ export function Contact() {
           {/* Contact Information */}
           <div className="order-1 lg:order-2">
             <div className="lg:sticky lg:top-24">
-              <h3 className="text-2xl font-bold mb-8">Let's discuss your project</h3>
+              <h3 className="text-2xl font-bold mb-8">Get in touch</h3>
               
               <div className="space-y-6 mb-8">
                 <div className="flex items-start gap-4">
