@@ -53,13 +53,13 @@ export function About() {
         </div>
         
         {/* Floating Elements */}
-        <div className="absolute top-20 right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-40 left-20 w-24 h-24 bg-primary/5 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-20 right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl animate-float"></div>
+        <div className="absolute bottom-40 left-20 w-24 h-24 bg-primary/5 rounded-full blur-xl animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Why Choose <span className="gradient-text">FreelanceHub</span>
           </h2>
@@ -71,7 +71,7 @@ export function About() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
           {/* Left Column - Story */}
-          <div className="relative">
+          <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <div className="absolute -top-4 -left-4 w-20 h-20 bg-primary/10 rounded-full blur-lg"></div>
             <h3 className="text-2xl md:text-3xl font-bold mb-6 relative z-10">
               Our Mission: Connecting Vision with Talent
@@ -95,7 +95,7 @@ export function About() {
             {/* Values List */}
             <div className="mt-8 space-y-3 relative z-10">
               {values.map((value, index) => (
-                <div key={index} className="flex items-start gap-3 group">
+                <div key={index} className="flex items-start gap-3 group animate-fade-in" style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
                   <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
                   <span className="text-muted-foreground">{value}</span>
                 </div>
@@ -110,7 +110,7 @@ export function About() {
           </div>
 
           {/* Right Column - Features with Team Image */}
-          <div className="relative">
+          <div className="relative animate-fade-in" style={{ animationDelay: '0.4s' }}>
             {/* Team Collaboration Image */}
             <div className="mb-8 relative overflow-hidden rounded-2xl">
               <img 
@@ -130,8 +130,8 @@ export function About() {
               {features.map((feature, index) => (
                 <div 
                   key={feature.title}
-                  className="flex items-start gap-4 p-4 rounded-lg hover:bg-background/50 transition-all duration-300 group cursor-pointer"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="flex items-start gap-4 p-4 rounded-lg hover:bg-background/50 transition-all duration-300 group cursor-pointer animate-fade-in hover-scale"
+                  style={{ animationDelay: `${0.6 + index * 0.1}s` }}
                 >
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                     <feature.icon className="w-6 h-6 text-primary" />
@@ -151,7 +151,7 @@ export function About() {
         {/* How It Works Section */}
         <div className="border-t border-border pt-16 relative">
           <div className="absolute top-16 right-10 w-16 h-16 bg-primary/5 rounded-full blur-xl"></div>
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               How It <span className="gradient-text">Works</span>
             </h3>
@@ -179,7 +179,7 @@ export function About() {
                 description: "Work directly with your chosen freelancer while we provide support, milestone tracking, and quality assurance."
               }
             ].map((step, index) => (
-              <div key={step.step} className="text-center group">
+              <div key={step.step} className="text-center group animate-fade-in hover-scale" style={{ animationDelay: `${0.6 + index * 0.2}s` }}>
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                   <span className="text-2xl font-bold text-primary">{step.step}</span>
                 </div>

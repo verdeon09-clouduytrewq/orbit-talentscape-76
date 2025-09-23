@@ -4,14 +4,10 @@ import { FloatingChat } from "@/components/FloatingChat";
 import { BackgroundAnimation } from "@/components/BackgroundAnimation";
 import { Button } from "@/components/ui/button";
 import { Code, Smartphone, Globe, Zap, Shield, Layers } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const WebdevPage = () => {
-  const scrollToContact = () => {
-    const target = document.querySelector("#contact");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const navigate = useNavigate();
 
   const features = [
     {
@@ -81,12 +77,9 @@ const WebdevPage = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Professional <span className="gradient-text">Web Development</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Transform your ideas into powerful, modern web applications that drive results and engage your audience
             </p>
-            <Button onClick={scrollToContact} size="lg" className="mr-4">
-              Start Your Project
-            </Button>
           </div>
         </section>
 
@@ -171,7 +164,7 @@ const WebdevPage = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Let's discuss your project and turn your vision into reality
             </p>
-            <Button size="lg" onClick={scrollToContact}>
+            <Button size="lg" onClick={() => navigate("/contact")}>
               Get Started Today
             </Button>
           </div>

@@ -4,14 +4,10 @@ import { FloatingChat } from "@/components/FloatingChat";
 import { BackgroundAnimation } from "@/components/BackgroundAnimation";
 import { Button } from "@/components/ui/button";
 import { Bot, Workflow, Clock, TrendingUp, Zap, Users, MessageSquare, BarChart3 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AIAgentsPage = () => {
-  const scrollToContact = () => {
-    const target = document.querySelector("#contact");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const navigate = useNavigate();
 
   const benefits = [
     {
@@ -102,12 +98,9 @@ const AIAgentsPage = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               AI Agents & <span className="gradient-text">Automation</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Transform your business with intelligent automation solutions that work 24/7 to boost efficiency and drive growth
             </p>
-            <Button onClick={scrollToContact} size="lg" className="mr-4">
-              Start Automating
-            </Button>
           </div>
         </section>
 
@@ -226,7 +219,7 @@ const AIAgentsPage = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Let's discuss how AI agents can transform your operations and boost productivity
             </p>
-            <Button size="lg" onClick={scrollToContact}>
+            <Button size="lg" onClick={() => navigate("/contact")}>
               Start Your AI Journey
             </Button>
           </div>
