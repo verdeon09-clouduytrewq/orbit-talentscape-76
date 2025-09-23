@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Calendar, MessageSquare } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, MessageSquare, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
@@ -13,6 +13,11 @@ export function Contact() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatMessage, setChatMessage] = useState("");
+  const [chatMessages, setChatMessages] = useState([
+    { type: "bot", message: "Hi! I'm here to help you get started with your project. What can I assist you with today?" }
+  ]);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,17 +49,54 @@ export function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleChatSend = () => {
+    if (!chatMessage.trim()) return;
+    
+    setChatMessages(prev => [...prev, { type: "user", message: chatMessage }]);
+    setChatMessage("");
+    
+    // Simulate bot response
+    setTimeout(() => {
+      setChatMessages(prev => [...prev, { 
+        type: "bot", 
+        message: "Thanks for your message! I'll connect you with our team right away. In the meantime, feel free to fill out the form below with your project details." 
+      }]);
+    }, 1000);
+  };
+
   return (
     <section id="contact" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Get in <span className="gradient-text">Touch</span>
+            Let's Start Working on <span className="gradient-text">Your Project</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to start your project? Choose how you'd like to connect with us.
+            Ready to begin? Connect with us through live chat or send us your project details.
           </p>
+        </div>
+
+        {/* Live Chat Option */}
+        <div className="flex justify-center mb-16">
+          <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-8 hover:shadow-lg transition-all duration-300 animate-fade-in hover:scale-105 max-w-md">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 hover:bg-primary/20 transition-colors">
+                <MessageSquare className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Live Chat Support</h3>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                Get instant answers and start planning your project with our live chat support.
+              </p>
+              <Button 
+                onClick={() => setIsChatOpen(true)}
+                className="w-full"
+                size="lg"
+              >
+                Start Live Chat
+              </Button>
+            </div>
+          </div>
         </div>
 
 
@@ -263,6 +305,64 @@ export function Contact() {
             </div>
           </div>
         </div>
+
+        {/* Live Chat Modal */}
+        {isChatOpen && (
+          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+            <div className="bg-background border border-border rounded-xl w-full max-w-md h-96 flex flex-col">
+              {/* Chat Header */}
+              <div className="flex items-center justify-between p-4 border-b border-border">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                    <MessageSquare className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Live Support</h4>
+                    <p className="text-xs text-muted-foreground">Online now</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setIsChatOpen(false)}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Chat Messages */}
+              <div className="flex-1 p-4 overflow-y-auto space-y-4">
+                {chatMessages.map((msg, index) => (
+                  <div key={index} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
+                      msg.type === 'user' 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-muted text-foreground'
+                    }`}>
+                      {msg.message}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Chat Input */}
+              <div className="p-4 border-t border-border">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={chatMessage}
+                    onChange={(e) => setChatMessage(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleChatSend()}
+                    placeholder="Type your message..."
+                    className="flex-1 px-3 py-2 text-sm border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <Button size="sm" onClick={handleChatSend}>
+                    <Send className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
