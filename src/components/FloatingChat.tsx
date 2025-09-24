@@ -24,7 +24,7 @@ export function FloatingChat() {
     return () => window.removeEventListener('openFloatingChat', handleOpenChat);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
 
@@ -34,6 +34,24 @@ export function FloatingChat() {
       text: message,
       time: new Date()
     };
+
+    // Send data to n8n webhook
+    try {
+      await fetch('https://vcxnm.app.n8n.cloud/webhook-test/91f197a6-dd9a-49fe-bbfa-303b7c8df2ef', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          source: 'floating_chat',
+          message: message,
+          timestamp: new Date().toISOString(),
+          user_data: newMessage
+        })
+      });
+    } catch (error) {
+      console.error('Failed to send to webhook:', error);
+    }
 
     const botResponse = {
       id: messages.length + 2,

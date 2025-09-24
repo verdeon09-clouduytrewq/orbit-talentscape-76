@@ -42,7 +42,7 @@ export function Services() {
   return (
     <>
       {/* About Hero Section */}
-      <section className="py-32 bg-background relative overflow-hidden">
+      <section id="services" className="py-32 bg-background relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={aboutBackground} 

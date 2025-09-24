@@ -24,8 +24,22 @@ export function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission to n8n webhook
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Send form data to n8n webhook
+    try {
+      await fetch('https://vcxnm.app.n8n.cloud/webhook-test/91f197a6-dd9a-49fe-bbfa-303b7c8df2ef', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          source: 'contact_form',
+          timestamp: new Date().toISOString(),
+          form_data: formData
+        })
+      });
+    } catch (error) {
+      console.error('Failed to send to webhook:', error);
+    }
 
     toast({
       title: "Message Sent!",
@@ -49,8 +63,25 @@ export function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleChatSend = () => {
+  const handleChatSend = async () => {
     if (!chatMessage.trim()) return;
+    
+    // Send chat message to n8n webhook
+    try {
+      await fetch('https://vcxnm.app.n8n.cloud/webhook-test/91f197a6-dd9a-49fe-bbfa-303b7c8df2ef', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          source: 'contact_live_chat',
+          message: chatMessage,
+          timestamp: new Date().toISOString()
+        })
+      });
+    } catch (error) {
+      console.error('Failed to send to webhook:', error);
+    }
     
     setChatMessages(prev => [...prev, { type: "user", message: chatMessage }]);
     setChatMessage("");

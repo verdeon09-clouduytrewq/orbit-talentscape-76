@@ -7,7 +7,7 @@ import logo from "@/assets/logo.jpg";
 
 const navigationItems = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
+  { name: "About", href: "/", isScroll: true, target: "services" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "FAQ", href: "/faq" },
@@ -16,7 +16,48 @@ const navigationItems = [
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section[id]');
+      let current = "";
+
+      sections.forEach((section) => {
+        const htmlSection = section as HTMLElement;
+        const sectionTop = htmlSection.offsetTop;
+        const sectionHeight = htmlSection.offsetHeight;
+        if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+          current = section.getAttribute('id') || "";
+        }
+      });
+
+      setActiveSection(current);
+    };
+
+    if (location.pathname === '/') {
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Check initial position
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [location.pathname]);
+
+  const handleNavClick = (item: typeof navigationItems[0]) => {
+    if (item.isScroll && location.pathname === '/') {
+      const element = document.getElementById(item.target!);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const isActive = (item: typeof navigationItems[0]) => {
+    if (item.isScroll && location.pathname === '/') {
+      return activeSection === item.target;
+    }
+    return location.pathname === item.href;
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-card/98 backdrop-blur-sm border-b-2 border-primary/20">
@@ -32,15 +73,27 @@ export function Navigation() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navigationItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`nav-link px-3 py-2 text-sm font-medium transition-colors ${
-                    location.pathname === item.href ? "active" : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {item.name}
-                </Link>
+                item.isScroll ? (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavClick(item)}
+                    className={`nav-link px-3 py-2 text-sm font-medium transition-colors ${
+                      isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {item.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`nav-link px-3 py-2 text-sm font-medium transition-colors ${
+                      isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
             </div>
           </div>
@@ -73,16 +126,31 @@ export function Navigation() {
         <div className="md:hidden bg-background border-b border-border">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navigationItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`nav-link block px-3 py-2 text-base font-medium transition-colors ${
-                  location.pathname === item.href ? "active" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {item.name}
-              </Link>
+              item.isScroll ? (
+                <button
+                  key={item.name}
+                  onClick={() => {
+                    handleNavClick(item);
+                    setIsOpen(false);
+                  }}
+                  className={`nav-link block px-3 py-2 text-base font-medium transition-colors w-full text-left ${
+                    isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`nav-link block px-3 py-2 text-base font-medium transition-colors ${
+                    isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
             <div className="pt-4 pb-2">
               <Link to="/services" onClick={() => setIsOpen(false)}>
