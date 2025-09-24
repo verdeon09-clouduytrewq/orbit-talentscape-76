@@ -1,14 +1,10 @@
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import heroBackground from "@/assets/hero-background.jpg";
 
 export function Hero() {
-  const scrollToSection = (href: string) => {
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center hero-section">
@@ -69,7 +65,7 @@ export function Hero() {
             <Button 
               variant="hero" 
               size="lg" 
-              onClick={() => scrollToSection("#contact")}
+              onClick={() => navigate("/contact")}
               className="group"
             >
               Get Started Today
