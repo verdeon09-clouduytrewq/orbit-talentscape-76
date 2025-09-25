@@ -7,7 +7,7 @@ import logo from "@/assets/logo.jpg";
 
 const navigationItems = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/", isScroll: true, target: "services" },
+  { name: "About", href: "/", isScroll: true, target: "about" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "FAQ", href: "/faq" },
@@ -28,10 +28,15 @@ export function Navigation() {
         const htmlSection = section as HTMLElement;
         const sectionTop = htmlSection.offsetTop;
         const sectionHeight = htmlSection.offsetHeight;
-        if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+        if (window.scrollY >= sectionTop - 200 && window.scrollY < sectionTop + sectionHeight - 200) {
           current = section.getAttribute('id') || "";
         }
       });
+
+      // If we're at the very top, set to empty (Home will be active)
+      if (window.scrollY < 200) {
+        current = "";
+      }
 
       setActiveSection(current);
     };

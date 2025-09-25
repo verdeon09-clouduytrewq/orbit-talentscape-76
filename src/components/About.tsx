@@ -1,6 +1,4 @@
-import { CheckCircle, Users, Trophy, Clock, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { CheckCircle, Users, Trophy, Clock } from "lucide-react";
 import aboutBackground from "@/assets/about-background.jpg";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
 
@@ -37,12 +35,10 @@ const values = [
 ];
 
 export function About() {
-  const navigate = useNavigate();
-
   return (
     <>
-      {/* Hero Section */}
-      <section className="py-32 bg-background relative overflow-hidden">
+      {/* About Hero Section */}
+      <section id="about" className="py-32 bg-background relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={aboutBackground} 
@@ -228,30 +224,6 @@ export function About() {
                 )}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-card/30 relative">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl animate-float"></div>
-          <div className="absolute bottom-10 right-10 w-24 h-24 bg-primary/10 rounded-full blur-xl animate-float" style={{ animationDelay: '2s' }}></div>
-        </div>
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Start Your <span className="gradient-text">Project?</span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Join thousands of satisfied clients who have transformed their businesses 
-              with our exceptional freelance talent.
-            </p>
-            <Button variant="hero" size="lg" onClick={() => navigate("/contact")} className="group">
-              Get Started Today
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
           </div>
         </div>
       </section>
