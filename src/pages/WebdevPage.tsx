@@ -155,18 +155,80 @@ const WebdevPage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA Section with Contact Form */}
         <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Ready to Build Your <span className="gradient-text">Website?</span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Let's discuss your project and turn your vision into reality
-            </p>
-            <Button size="lg" onClick={() => navigate("/contact")}>
-              Get Started Today
-            </Button>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                Ready to Build Your <span className="gradient-text">Website?</span>
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                Let's discuss your project and turn your vision into reality
+              </p>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-card p-8 rounded-xl shadow-lg">
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Full Name *</label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Email Address *</label>
+                    <input
+                      type="email"
+                      required
+                      className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Project Budget</label>
+                    <select className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+                      <option value="">Select budget range</option>
+                      <option value="under-5k">Under $5,000</option>
+                      <option value="5k-15k">$5,000 - $15,000</option>
+                      <option value="15k-30k">$15,000 - $30,000</option>
+                      <option value="30k-plus">$30,000+</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Timeline</label>
+                    <select className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+                      <option value="">Select timeline</option>
+                      <option value="asap">ASAP</option>
+                      <option value="1-2-months">1-2 months</option>
+                      <option value="3-6-months">3-6 months</option>
+                      <option value="flexible">Flexible</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Project Description *</label>
+                  <textarea
+                    required
+                    rows={4}
+                    className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-vertical"
+                    placeholder="Describe your web development project, features needed, target audience, and any specific requirements..."
+                  />
+                </div>
+
+                <Button type="submit" className="w-full" size="lg">
+                  Start My Web Development Project
+                </Button>
+              </form>
+            </div>
           </div>
         </section>
       </main>

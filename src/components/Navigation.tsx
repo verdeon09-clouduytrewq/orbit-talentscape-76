@@ -7,7 +7,6 @@ import logo from "@/assets/logo.jpg";
 
 const navigationItems = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/", isScroll: true, target: "about" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "FAQ", href: "/faq" },
@@ -49,18 +48,10 @@ export function Navigation() {
   }, [location.pathname]);
 
   const handleNavClick = (item: typeof navigationItems[0]) => {
-    if (item.isScroll && location.pathname === '/') {
-      const element = document.getElementById(item.target!);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    // Navigation only handles regular links now
   };
 
   const isActive = (item: typeof navigationItems[0]) => {
-    if (item.isScroll && location.pathname === '/') {
-      return activeSection === item.target;
-    }
     return location.pathname === item.href;
   };
 
@@ -78,27 +69,15 @@ export function Navigation() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navigationItems.map((item) => (
-                item.isScroll ? (
-                  <button
-                    key={item.name}
-                    onClick={() => handleNavClick(item)}
-                    className={`nav-link px-3 py-2 text-sm font-medium transition-colors ${
-                      isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {item.name}
-                  </button>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`nav-link px-3 py-2 text-sm font-medium transition-colors ${
-                      isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`nav-link px-3 py-2 text-sm font-medium transition-colors ${
+                    isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </Link>
               ))}
             </div>
           </div>
@@ -131,31 +110,16 @@ export function Navigation() {
         <div className="md:hidden bg-background border-b border-border">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navigationItems.map((item) => (
-              item.isScroll ? (
-                <button
-                  key={item.name}
-                  onClick={() => {
-                    handleNavClick(item);
-                    setIsOpen(false);
-                  }}
-                  className={`nav-link block px-3 py-2 text-base font-medium transition-colors w-full text-left ${
-                    isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {item.name}
-                </button>
-              ) : (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`nav-link block px-3 py-2 text-base font-medium transition-colors ${
-                    isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )
+              <Link
+                key={item.name}
+                to={item.href}
+                onClick={() => setIsOpen(false)}
+                className={`nav-link block px-3 py-2 text-base font-medium transition-colors ${
+                  isActive(item) ? "active" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {item.name}
+              </Link>
             ))}
             <div className="pt-4 pb-2">
               <Link to="/services" onClick={() => setIsOpen(false)}>

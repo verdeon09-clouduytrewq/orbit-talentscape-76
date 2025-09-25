@@ -210,18 +210,80 @@ const AIAgentsPage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA Section with Contact Form */}
         <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Ready to Automate Your <span className="gradient-text">Business?</span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Let's discuss how AI agents can transform your operations and boost productivity
-            </p>
-            <Button size="lg" onClick={() => navigate("/contact")}>
-              Start Your AI Journey
-            </Button>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                Ready to Automate Your <span className="gradient-text">Business?</span>
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                Let's discuss how AI agents can transform your operations and boost productivity
+              </p>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-card p-8 rounded-xl shadow-lg">
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Full Name *</label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Email Address *</label>
+                    <input
+                      type="email"
+                      required
+                      className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Company Size</label>
+                    <select className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+                      <option value="">Select company size</option>
+                      <option value="startup">Startup (1-10)</option>
+                      <option value="small">Small Business (11-50)</option>
+                      <option value="medium">Medium Business (51-200)</option>
+                      <option value="enterprise">Enterprise (200+)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">AI Solution Interest</label>
+                    <select className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+                      <option value="">Select solution type</option>
+                      <option value="chatbot">AI Chatbot</option>
+                      <option value="workflow">Workflow Automation</option>
+                      <option value="data-processing">Data Processing</option>
+                      <option value="multiple">Multiple Solutions</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Current Challenges *</label>
+                  <textarea
+                    required
+                    rows={4}
+                    className="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-vertical"
+                    placeholder="What business processes are you looking to automate? What challenges are you facing that AI could help solve?"
+                  />
+                </div>
+
+                <Button type="submit" className="w-full" size="lg">
+                  Get My AI Automation Plan
+                </Button>
+              </form>
+            </div>
           </div>
         </section>
       </main>

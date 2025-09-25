@@ -1,4 +1,4 @@
-import { Code, Palette, Smartphone, Globe, Search, Zap, ArrowRight } from "lucide-react";
+import { Code, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -7,37 +7,15 @@ const services = [
     icon: Code,
     title: "Web Development",
     description: "Custom websites and web applications built with modern technologies",
-    features: ["React & Next.js", "E-commerce Solutions", "API Integration", "Performance Optimization"]
-  },
-  {
-    icon: Palette,
-    title: "UI/UX Design",
-    description: "Beautiful, user-friendly designs that convert visitors into customers",
-    features: ["User Research", "Wireframing", "Prototyping", "Design Systems"]
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile Development",
-    description: "Native and cross-platform mobile apps for iOS and Android",
-    features: ["React Native", "Flutter", "App Store Optimization", "Push Notifications"]
-  },
-  {
-    icon: Globe,
-    title: "Digital Marketing",
-    description: "Comprehensive marketing strategies to grow your online presence",
-    features: ["Social Media", "Content Strategy", "Email Marketing", "Analytics"]
-  },
-  {
-    icon: Search,
-    title: "SEO Optimization",
-    description: "Improve your search rankings and drive organic traffic",
-    features: ["Keyword Research", "Technical SEO", "Content Optimization", "Link Building"]
+    features: ["React & Next.js", "E-commerce Solutions", "API Integration", "Performance Optimization"],
+    href: "/webdev"
   },
   {
     icon: Zap,
-    title: "Automation",
-    description: "Streamline your business processes with custom automation solutions",
-    features: ["Workflow Automation", "API Integrations", "Data Processing", "Task Scheduling"]
+    title: "AI Agents & Automation",
+    description: "Streamline your business processes with intelligent AI automation solutions",
+    features: ["AI Chatbots", "Workflow Automation", "Data Processing", "Smart Integrations"],
+    href: "/ai-agents"
   }
 ];
 
@@ -60,13 +38,13 @@ export function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => (
             <div 
               key={service.title}
               className="group p-8 rounded-2xl bg-card/50 hover:bg-card border border-border/50 hover:border-primary/20 transition-all duration-300 cursor-pointer animate-fade-in hover-scale"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
-              onClick={() => navigate('/services')}
+              onClick={() => navigate(service.href)}
             >
               <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                 <service.icon className="w-8 h-8 text-primary" />
